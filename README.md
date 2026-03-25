@@ -17,13 +17,14 @@ Landing page con diseño cyberpunk/tech para empresa de IA y automatización. In
 ```
 jeosys/
 ├── index.html          # Página principal
-├── css/style.css      # Estilos
-├── js/script.js       # Funcionalidad
-├── favicon.svg        # Favicon
-├── manifest.json     # PWA Manifest
-├── sw.js              # Service Worker
-├── assets/img/        # Imágenes
-└── docs/logo/         # Logos fuente
+├── css/style.css       # Estilos
+├── js/
+│   ├── script.js       # Funcionalidad
+│   └── sw.js           # Service Worker (PWA)
+├── favicon.svg         # Favicon
+├── manifest.json       # PWA Manifest
+├── assets/img/         # Imágenes
+└── docs/logo/          # Logos fuente
 ```
 
 ## Características

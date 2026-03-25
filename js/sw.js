@@ -4,6 +4,7 @@ const urlsToCache = [
   '/index.html',
   '/css/style.css',
   '/js/script.js',
+  '/js/sw.js',
   '/assets/img/logo-jeosys.png',
   '/favicon.svg',
   'https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@300;500;800&display=swap',
