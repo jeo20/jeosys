@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         init() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.v = (Math.random() - 0.5) * 0.4;
+            this.v = (Math.random() - 0.5) * 1.2;
+            this.size = Math.random() * 4 + 2;
         }
         update() {
             this.x += this.v;
@@ -27,33 +28,63 @@ document.addEventListener('DOMContentLoaded', () => {
             if(this.y > canvas.height || this.y < 0) this.v *= -1;
         }
         draw() {
-            ctx.fillStyle = 'rgba(0, 246, 255, 0.5)';
-            ctx.beginPath(); 
-            ctx.arc(this.x, this.y, 1.2, 0, Math.PI*2); 
+            // Glow effect
+            const outerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 5);
+            outerGlow.addColorStop(0, 'rgba(0, 246, 255, 0.3)');
+            outerGlow.addColorStop(0.5, 'rgba(0, 200, 255, 0.1)');
+            outerGlow.addColorStop(1, 'rgba(0, 246, 255, 0)');
+            ctx.fillStyle = outerGlow;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Bright core
+            const coreGradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+            coreGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            coreGradient.addColorStop(0.3, 'rgba(0, 255, 255, 1)');
+            coreGradient.addColorStop(0.6, 'rgba(0, 246, 255, 0.8)');
+            coreGradient.addColorStop(1, 'rgba(0, 200, 255, 0)');
+            ctx.fillStyle = coreGradient;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // White center
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
-    for(let i = 0; i < 60; i++) particles.push(new Particle());
+    for(let i = 0; i < 80; i++) particles.push(new Particle());
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.globalCompositeOperation = 'lighter';
+        
         particles.forEach((p, i) => {
             p.update();
             p.draw();
             
             for(let j = i + 1; j < particles.length; j++){
                 const d = Math.hypot(p.x - particles[j].x, p.y - particles[j].y);
-                if(d < 130){
-                    ctx.strokeStyle = `rgba(0, 246, 255, ${0.12 - d/1000})`;
-                    ctx.lineWidth = 0.6;
-                    ctx.beginPath(); 
-                    ctx.moveTo(p.x, p.y); 
-                    ctx.lineTo(particles[j].x, particles[j].y); 
-                    ctx.stroke();
+                if(d < 180){
+                    const alpha = 0.6 - (d / 300);
+                    if(alpha > 0.1) {
+                        ctx.strokeStyle = `rgba(0, 246, 255, ${alpha})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
                 }
             }
         });
+        
+        ctx.globalCompositeOperation = 'source-over';
         requestAnimationFrame(animate);
     }
     animate();
@@ -62,40 +93,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenuBtn.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        const isExpanded = mobileMenuBtn.classList.contains('active');
-        mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenuBtn.classList.remove('active');
-            navLinks.classList.remove('active');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    if(mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            const isExpanded = mobileMenuBtn.classList.contains('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
         });
-    });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
 
     // ============ INTERSECTION OBSERVER (Fade Animations) ============
     const fadeElements = document.querySelectorAll('.fade-in');
     
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+    if(fadeElements.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                fadeObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-    fadeElements.forEach(el => fadeObserver.observe(el));
+        fadeElements.forEach(el => fadeObserver.observe(el));
+    }
 
     // ============ MULTIIDIOMA ============
     let currentLang = 'es';
@@ -137,12 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.querySelector('#contacto h2').textContent = t.contactoTitle;
         
-        document.getElementByName('name')[0].placeholder = t.namePlaceholder;
-        document.getElementByName('email')[0].placeholder = t.emailPlaceholder;
-        document.getElementByName('message')[0].placeholder = t.messagePlaceholder;
-        document.getElementById('submit-btn').textContent = t.submitBtn;
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        if(nameInput) nameInput.placeholder = t.namePlaceholder;
+        if(emailInput) emailInput.placeholder = t.emailPlaceholder;
+        if(messageInput) messageInput.placeholder = t.messagePlaceholder;
         
-        document.querySelector('footer p').textContent = t.footer;
+        const submitBtn = document.getElementById('submit-btn');
+        if(submitBtn) submitBtn.textContent = t.submitBtn;
+        
+        const footerP = document.querySelector('footer p');
+        if(footerP) footerP.textContent = t.footer;
         
         document.documentElement.lang = lang;
         currentLang = lang;
@@ -170,62 +211,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
     const formStatus = document.getElementById('form-status');
 
-    emailjs.init('xVwdbB46eyW5LrqW4');
+    if(form && submitBtn && emailjs) {
+        emailjs.init('xVwdbB46eyW5LrqW4');
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = window.translations[currentLang].sending;
-        submitBtn.disabled = true;
-        formStatus.textContent = '';
-        formStatus.className = 'form-status';
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = window.translations[currentLang].sending;
+            submitBtn.disabled = true;
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
 
-        const name = sanitizeInput(document.getElementById('name').value.trim());
-        const email = sanitizeInput(document.getElementById('email').value.trim());
-        const message = sanitizeInput(document.getElementById('message').value.trim());
+            const name = sanitizeInput(document.getElementById('name').value.trim());
+            const email = sanitizeInput(document.getElementById('email').value.trim());
+            const message = sanitizeInput(document.getElementById('message').value.trim());
 
-        if (!name || !email || !message) {
-            formStatus.textContent = 'Todos los campos son requeridos';
-            formStatus.classList.add('error');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            formStatus.textContent = 'Email inválido';
-            formStatus.classList.add('error');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            return;
-        }
-
-        const templateParams = {
-            from_name: name,
-            from_email: email,
-            message: message,
-            to_name: 'JEOSYS'
-        };
-
-        emailjs.send('service_lpndc49', 'template_qj19ozw', templateParams)
-            .then(() => {
-                formStatus.textContent = window.translations[currentLang].success;
-                formStatus.classList.add('success');
-                submitBtn.style.backgroundColor = '#00ff88';
-                submitBtn.style.color = '#000';
-                submitBtn.textContent = '✓ ENVIADO';
-                form.reset();
-            })
-            .catch((error) => {
-                formStatus.textContent = window.translations[currentLang].error;
+            if (!name || !email || !message) {
+                formStatus.textContent = 'Todos los campos son requeridos';
                 formStatus.classList.add('error');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-                console.error('EmailJS Error:', error);
-            });
-    });
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                formStatus.textContent = 'Email inválido';
+                formStatus.classList.add('error');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_name: 'JEOSYS'
+            };
+
+            emailjs.send('service_lpndc49', 'template_qj19ozw', templateParams)
+                .then(() => {
+                    formStatus.textContent = window.translations[currentLang].success;
+                    formStatus.classList.add('success');
+                    submitBtn.style.backgroundColor = '#00ff88';
+                    submitBtn.style.color = '#000';
+                    submitBtn.textContent = '✓ ENVIADO';
+                    form.reset();
+                })
+                .catch((error) => {
+                    formStatus.textContent = window.translations[currentLang].error;
+                    formStatus.classList.add('error');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    console.error('EmailJS Error:', error);
+                });
+        });
+    }
 
     // ============ SMOOTH SCROLL FOR ANCHOR LINKS ============
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
