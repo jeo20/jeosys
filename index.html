@@ -3,66 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeosys IA | Soluciones de Inteligencia Artificial y Datos</title>
-    <meta name="description" content="Consultoría experta en IA, Ciencia de Datos y Automatización para empresas.">
+    <title>JEOSYS IA // Inteligencia Artificial y Ciencia de Datos</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="JEOSYS - Ingeniería de IA y Ciencia de Datos. Automatización RPA, redes neuronales y análisis predictivo para eficiencia industrial.">
+    <meta name="keywords" content="IA, inteligencia artificial, data science, machine learning, RPA, automatización, análisis predictivo, ciencia de datos">
+    <meta name="author" content="JEOSYS IA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="JEOSYS IA // Sistemas Autónomos">
+    <meta property="og:description" content="Optimizamos la toma de decisiones mediante arquitecturas de IA diseñadas para la eficiencia industrial y la claridad de datos.">
+    <meta property="og:image" content="assets/img/logo-jeosys.png">
+    <meta property="og:url" content="https://jeosys.com.ar">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/img/logo-jeosys.png">
+    
+    <!-- Preconnect para fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <div class="bg-glow"></div>
     <canvas id="particleCanvas"></canvas>
 
-    <nav>
-        <a href="#" class="logo-link">
-            <img src="assets/img/logo-jeosys.png" alt="Jeosys IA Logo" class="logo-img"> <span class="highlight"> jeosys</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#contacto" class="btn-small-nav">Contacto</a></li>
-        </ul>
+    <nav class="contrast-nav" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <a href="#" class="brand-link" aria-label="JEOSYS - Ir al inicio">
+                <img src="assets/img/logo-jeosys.png" alt="Logo Jeosys" class="brand-logo-img" loading="lazy">
+                <span class="brand-text">jeosys</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-menu" role="menubar">
+                <li role="none"><a href="#servicios" role="menuitem">Servicios</a></li>
+                <li role="none"><a href="#ecosistema" role="menuitem">Ecosistema</a></li>
+                <li role="none"><a href="#contacto" class="btn-nav" role="menuitem">Hablemos</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="es" aria-label="Cambiar a español">ES</button>
+                <button class="lang-btn" data-lang="en" aria-label="Change to English">EN</button>
+            </div>
+        </div>
     </nav>
 
-    <header class="hero">
-        <h1 class="reveal">INTELIGENCIA QUE <br><span class="highlight">IMPULSA NEGOCIOS</span></h1>
-        <p class="reveal-delay">Especialistas en Ciencia de Datos e IA a medida para empresas con visión de futuro.</p>
-        <div class="cta-container reveal-delay">
-            <a href="#contacto" class="btn-neon">Iniciar Consultoría</a>
-        </div>
-    </header>
+    <main>
+        <header class="hero-section">
+            <div class="hero-content">
+                <span class="eyebrow">INGENIERÍA DE PRECISIÓN</span>
+                <h1>SISTEMAS <br><span class="accent-text">AUTÓNOMOS</span></h1>
+                <p>Optimizamos la toma de decisiones mediante arquitecturas de IA diseñadas para la eficiencia industrial y la claridad de datos.</p>
+                <div class="hero-btns">
+                    <a href="#contacto" class="btn-main">AGENDAR CONSULTORÍA</a>
+                </div>
+            </div>
+        </header>
 
-    <section id="servicios" class="services">
-        <div class="card fade-in">
-            <div class="icon">🤖</div>
-            <h3>Inteligencia Artificial</h3>
-            <p>Modelos predictivos y algoritmos personalizados para anticipar el mercado.</p>
-        </div>
-        <div class="card fade-in">
-            <div class="icon">📊</div>
-            <h3>Ciencia de Datos</h3>
-            <p>Convertimos el caos de tus datos en hojas de ruta estratégicas y visuales.</p>
-        </div>
-        <div class="card fade-in">
-            <div class="icon">⚙️</div>
-            <h3>Automatizaciones</h3>
-            <p>Optimización de procesos mediante RPA avanzado para ahorrar tiempo y costos.</p>
-        </div>
-    </section>
+        <section id="servicios" class="services-grid" aria-labelledby="servicios-title">
+            <h2 id="servicios-title" class="visually-hidden">Servicios</h2>
+            <div class="card fade-in">
+                <div class="card-num">01 // IA_CORE</div>
+                <h3>INTELIGENCIA_AUTÓNOMA</h3>
+                <p>Redes neuronales que aprenden y ejecutan procesos complejos sin intervención manual.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-num">02 // DATA_MINING</div>
+                <h3>CIENCIA_DE_DATOS</h3>
+                <p>Análisis predictivo para transformar volúmenes de información en activos estratégicos.</p>
+            </div>
+            <div class="card fade-in">
+                <div class="card-num">03 // RPA_SYSTEMS</div>
+                <h3>AUTOMATIZACIÓN</h3>
+                <p>Eliminación de la fricción operativa mediante robots de software de alta fidelidad.</p>
+            </div>
+        </section>
 
-    <section id="contacto" class="contact-strip fade-in">
-        <h2>¿Listo para transformar tu empresa?</h2>
-        <p>Hablemos sobre cómo la IA puede trabajar para ti.</p>
-        <a href="mailto:contacto@jeosys.ai" class="btn-neon">Enviar Mensaje</a>
-    </section>
+        <section id="ecosistema" class="ecosystem-section" aria-labelledby="ecosistema-title">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="eyebrow">CONECTIVIDAD TOTAL</span>
+                    <h2 id="ecosistema-title">ECOSISTEMA_DE_INTEGRACIÓN</h2>
+                    <p>Integración nativa con su infraestructura actual para una transición tecnológica transparente.</p>
+                </div>
+                <div class="tech-stack">
+                    <div class="tech-item fade-in">
+                        <div class="tech-icon">SQL</div>
+                        <span>DATABASE</span>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-icon">API</div>
+                        <span>REST_CONNECT</span>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-icon">☁️</div>
+                        <span>CLOUD_SERVICES</span>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-icon">📊</div>
+                        <span>BI_VISUALS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact-section" aria-labelledby="contacto-title">
+            <div class="contact-card fade-in">
+                <h2 id="contacto-title">INICIAR_PROTOCOLO</h2>
+                <form class="simple-form" id="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="visually-hidden">Nombre</label>
+                        <input type="text" id="name" name="name" placeholder="SU NOMBRE" required aria-describedby="name-desc">
+                        <span id="name-desc" class="visually-hidden">Ingrese su nombre completo</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email</label>
+                        <input type="email" id="email" name="email" placeholder="EMAIL DE EMPRESA" required aria-describedby="email-desc">
+                        <span id="email-desc" class="visually-hidden">Ingrese su correo electrónico empresarial</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="visually-hidden">Mensaje</label>
+                        <textarea id="message" name="message" placeholder="DESCRIBA SU PROYECTO O CONSULTA..." rows="5" required aria-describedby="message-desc"></textarea>
+                        <span id="message-desc" class="visually-hidden">Describa su proyecto o consulta</span>
+                    </div>
+                    <button type="submit" id="submit-btn">EJECUTAR_SOLICITUD</button>
+                    <p class="form-status" id="form-status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Jeosys IA. Todos los derechos reservados.</p>
+        <p>&copy; 2026 JEOSYS IA // TECNOLOGÍA AUTÓNOMA</p>
     </footer>
 
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Google Analytics 4 (REEMPLAZA G-XXXXXXXXXX CON TU ID REAL) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Textos para multiidioma -->
+    <script>
+        const translations = {
+            es: {
+                eyebrow: "INGENIERÍA DE PRECISIÓN",
+                title: "SISTEMAS AUTÓNOMOS",
+                subtitle: "Optimizamos la toma de decisiones mediante arquitecturas de IA diseñadas para la eficiencia industrial y la claridad de datos.",
+                cta: "AGENDAR CONSULTORÍA",
+                servicios: "Servicios",
+                ecosistema: "Ecosistema",
+                contacto: "Hablemos",
+                iaCore: "INTELIGENCIA_AUTÓNOMA",
+                iaCoreDesc: "Redes neuronales que aprenden y ejecutan procesos complejos sin intervención manual.",
+                dataMining: "CIENCIA_DE_DATOS",
+                dataMiningDesc: "Análisis predictivo para transformar volúmenes de información en activos estratégicos.",
+                rpa: "AUTOMATIZACIÓN",
+                rpaDesc: "Eliminación de la fricción operativa mediante robots de software de alta fidelidad.",
+                ecosistemaTitle: "ECOSISTEMA_DE_INTEGRACIÓN",
+                ecosistemaDesc: "Integración nativa con su infraestructura actual para una transición tecnológica transparente.",
+                contactoTitle: "INICIAR_PROTOCOLO",
+                namePlaceholder: "SU NOMBRE",
+                emailPlaceholder: "EMAIL DE EMPRESA",
+                messagePlaceholder: "DESCRIBA SU PROYECTO O CONSULTA...",
+                submitBtn: "EJECUTAR_SOLICITUD",
+                sending: "ENVIANDO...",
+                success: "MENSAJE ENVIADO CORRECTAMENTE",
+                error: "ERROR AL ENVIAR. INTENTA DE NUEVO",
+                footer: "© 2026 JEOSYS IA // TECNOLOGÍA AUTÓNOMA"
+            },
+            en: {
+                eyebrow: "PRECISION ENGINEERING",
+                title: "AUTONOMOUS SYSTEMS",
+                subtitle: "We optimize decision-making through AI architectures designed for industrial efficiency and data clarity.",
+                cta: "SCHEDULE CONSULTATION",
+                servicios: "Services",
+                ecosistema: "Ecosystem",
+                contacto: "Let's Talk",
+                iaCore: "AUTONOMOUS_INTELLIGENCE",
+                iaCoreDesc: "Neural networks that learn and execute complex processes without manual intervention.",
+                dataMining: "DATA_SCIENCE",
+                dataMiningDesc: "Predictive analysis to transform information volumes into strategic assets.",
+                rpa: "AUTOMATION",
+                rpaDesc: "Elimination of operational friction through high-fidelity software robots.",
+                ecosistemaTitle: "INTEGRATION_ECOSYSTEM",
+                ecosistemaDesc: "Native integration with your current infrastructure for seamless technological transition.",
+                contactoTitle: "INITIATE_PROTOCOL",
+                namePlaceholder: "YOUR NAME",
+                emailPlaceholder: "COMPANY EMAIL",
+                messagePlaceholder: "DESCRIBE YOUR PROJECT OR INQUIRY...",
+                submitBtn: "EXECUTE_REQUEST",
+                sending: "SENDING...",
+                success: "MESSAGE SENT SUCCESSFULLY",
+                error: "ERROR SENDING. TRY AGAIN",
+                footer: "© 2026 JEOSYS IA // AUTONOMOUS TECHNOLOGY"
+            }
+        };
+        window.translations = translations;
+    </script>
+    
     <script src="js/script.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registrado:', reg.scope))
+                    .catch(err => console.log('SW error:', err));
+            });
+        }
+    </script>
 </body>
 </html>
