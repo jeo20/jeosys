@@ -158,6 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ============ SANITIZE INPUT ============
+    function sanitizeInput(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     // ============ EMAILJS FORM ============
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
@@ -174,10 +181,31 @@ document.addEventListener('DOMContentLoaded', () => {
         formStatus.textContent = '';
         formStatus.className = 'form-status';
 
+        const name = sanitizeInput(document.getElementById('name').value.trim());
+        const email = sanitizeInput(document.getElementById('email').value.trim());
+        const message = sanitizeInput(document.getElementById('message').value.trim());
+
+        if (!name || !email || !message) {
+            formStatus.textContent = 'Todos los campos son requeridos';
+            formStatus.classList.add('error');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formStatus.textContent = 'Email inválido';
+            formStatus.classList.add('error');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+
         const templateParams = {
-            from_name: document.getElementById('name').value,
-            from_email: document.getElementById('email').value,
-            message: document.getElementById('message').value,
+            from_name: name,
+            from_email: email,
+            message: message,
             to_name: 'JEOSYS'
         };
 

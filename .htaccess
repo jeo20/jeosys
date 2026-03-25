@@ -1,0 +1,54 @@
+# Security Headers for Apache
+# Copy this file to your server root as .htaccess
+
+# Enable HSTS (requiere HTTPS primero)
+# Descomenta la línea siguiente cuando tengas HTTPS activo
+# Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+# X-Frame-Options
+Header always set X-Frame-Options "DENY"
+
+# X-Content-Type-Options
+Header always set X-Content-Type-Options "nosniff"
+
+# Referrer Policy
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Permissions Policy
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+# X-XSS-Protection (legacy but still useful)
+Header always set X-XSS-Protection "1; mode=block"
+
+# Remove server info
+Header always set Server "Jeosys-Server"
+Header always set X-Powered-By ""
+
+# Disable directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(env|log|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

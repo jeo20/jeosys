@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEOSYS IA // Inteligencia Artificial y Ciencia de Datos</title>
     
+    <!-- Security Headers (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com; frame-src 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="JEOSYS - Ingeniería de IA y Ciencia de Datos. Automatización RPA, redes neuronales y análisis predictivo para eficiencia industrial.">
     <meta name="keywords" content="IA, inteligencia artificial, data science, machine learning, RPA, automatización, análisis predictivo, ciencia de datos">
@@ -51,8 +58,14 @@
                 <li role="none"><a href="#servicios" role="menuitem">Servicios</a></li>
                 <li role="none"><a href="#ecosistema" role="menuitem">Ecosistema</a></li>
                 <li role="none"><a href="#contacto" class="btn-nav" role="menuitem">Hablemos</a></li>
+                <li role="none" class="mobile-lang">
+                    <div class="lang-switch">
+                        <button class="lang-btn" data-lang="es" aria-label="Cambiar a español">ES</button>
+                        <button class="lang-btn" data-lang="en" aria-label="Change to English">EN</button>
+                    </div>
+                </li>
             </ul>
-            <div class="lang-switch">
+            <div class="lang-switch desktop-lang">
                 <button class="lang-btn" data-lang="es" aria-label="Cambiar a español">ES</button>
                 <button class="lang-btn" data-lang="en" aria-label="Change to English">EN</button>
             </div>
@@ -145,6 +158,14 @@
     </main>
 
     <footer>
+        <div class="social-links">
+            <a href="https://facebook.com/jeosys" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: #b0b0b0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#b0b0b0"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com/jeosys" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: #b0b0b0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+        </div>
         <p>&copy; 2026 JEOSYS IA // TECNOLOGÍA AUTÓNOMA</p>
     </footer>
 

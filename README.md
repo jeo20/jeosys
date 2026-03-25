@@ -82,6 +82,24 @@ npx serve
 - Google Fonts (Orbitron, Syncopate, JetBrains Mono)
 - Canvas API
 
+## Seguridad
+
+### Headers implementados
+- **CSP** - Content Security Policy (previene XSS)
+- **X-Frame-Options** - Previene clickjacking
+- **X-Content-Type-Options** - Previene MIME sniffing
+- **Referrer-Policy** - Control de información de referencia
+- **Permissions-Policy** - Bloquea geolocalización, micrófono, cámara
+
+### Formulario
+- Sanitización de inputs (previene XSS)
+- Validación de email
+- Validación de campos requeridos
+
+### Archivos de seguridad
+- `.htaccess` - Headers adicionales para Apache
+- Configurar HTTPS en producción (obligatorio)
+
 ## Licencia
 
 © 2026 JEOSYS IA // TECNOLOGÍA AUTÓNOMA
